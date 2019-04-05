@@ -1,1 +1,1 @@
-# NMF
+# Non-Negative Matrix Factorization

@@ -1,32 +1,53 @@
 import numpy as np
 import pandas as pd
-import seaborn as sns
 from sklearn.feature_extraction.text import CountVectorizer
 
-# import dataset and show first few columnns
-df = pd.read_csv('abcnews-date-text.csv')
-print('\n')
-print(df.head())
-print('\n')
-#print(df['headline_text'].head())
 
 
-# trasform the dataset into a non-negative matrix A
-head_temp = df['headline_text'].head()
-vectorizer = CountVectorizer()
-A = vectorizer.fit_transform(head_temp).toarray()
+def preprocess(filename, col_name, max_feature_num):
+	''' 
+	Preprocess a column of a csv file for nonnegative matrix factorization.
 
-print(A)
-print('\n')
-print(vectorizer.get_feature_names())
-print('\n')
+	Parameters:
+		filename: str
+		col_name: str
+		max_feature_num: int
+			- integer specifing the maximum number of extracted features
 
-# trasform the dataset into a non-negative matrix A
-headlines = df['headline_text']
-vectorizer = CountVectorizer()
-A = vectorizer.fit_transform(headlines).toarray()
+	Returns:
+		A: nparray
+			- nparray that will be used for NMF
+		features: nparray
+			- nparray containing strings of extracted features
+	'''
 
-print(A[1:10, 1:10])
-print('\n')
-#print(vectorizer.get_feature_names())
-#print('\n')
+	# Import dataset and show first few columnns.
+	df = pd.read_csv(filename)
+	print('Prerpocessing ' + col_name + ' column of ' + filename + ' file...')
+	print('---------------------------------------------------------------------')
+	print('First few lines of ' + filename +'\n')
+	print(df.head())
+	print('')
+
+	# Transform the specified column of the given csv file into a matrix A.
+	# Store the discovered features to features.
+	headlines = df['headline_text']
+	vectorizer = CountVectorizer(max_features = max_feature_num)
+	A = vectorizer.fit_transform(headlines).toarray()
+	features = vectorizer.get_feature_names()
+
+	# Print out results.
+	print('---------------------------------------------------------------------')
+	print(str(np.size(A, 0)) + ' by ' + str(np.size(A, 1)) + ' matrix representing ' + col_name + ' column of ' + filename + ' file\n')
+	print(A)
+	print('')
+
+	print('---------------------------------------------------------------------')
+	print(str(len(features)) + ' features of ' + col_name + ' column of ' + filename + ' file\n')
+	print(features)
+	print('')
+
+	return A, features
+
+if __name__ == "__main__":
+	preprocess('abcnews-date-text.csv', 'headline_text', 50)

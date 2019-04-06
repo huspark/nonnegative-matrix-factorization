@@ -15,10 +15,10 @@ def preprocess(filename, col_name, max_feature_num):
 			- integer specifing the maximum number of extracted features
 
 	Returns:
-		A: nparray
-			- nparray that will be used for NMF
-		features: nparray
-			- nparray containing strings of extracted features
+		A: ndarray
+			- (# of datapoints) by (# of features) ndarray that will be used for NMF
+		features: list
+			- list with length of (# of features) containing strings of extracted features
 	'''
 
 	# Import dataset and show first few columnns.

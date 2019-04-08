@@ -23,6 +23,10 @@ def preprocess(filename, col_name, max_feature_num):
 
 	# Import dataset and show first few columnns.
 	df = pd.read_csv(filename)
+
+	# Experiment with 10000 data points
+	df = df.sample(frac = 0.01, random_state=1)
+
 	print('Prerpocessing ' + col_name + ' column of ' + filename + ' file...')
 	print('---------------------------------------------------------------------')
 	print('First few lines of ' + filename +'\n')
@@ -33,7 +37,7 @@ def preprocess(filename, col_name, max_feature_num):
 	# Store the discovered features to features.
 	headlines = df['headline_text']
 	vectorizer = CountVectorizer(max_features = max_feature_num)
-	A = vectorizer.fit_transform(headlines).toarray()
+	A = vectorizer.fit_transform(headlines).toarray().T
 	features = vectorizer.get_feature_names()
 
 	# Print out results.

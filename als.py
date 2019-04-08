@@ -37,11 +37,13 @@ def als(A, k, num_iter):
 		H[H < 0] = 0
 
 		# Update W
-		# Solve the least squares problem: argmin_H ||H.TW.T - A.T||
+		# Solve the least squares problem: argmin_W.T ||H.TW.T - A.T||
 		W = lstsq(H.T, A.T)[0].T
 
 		# Set negative elements of W to 0
 		W[W < 0] = 0
+
+		print("iteration " + str(n) + "...")
 
 	print('A = ')
 	print(A)
@@ -55,5 +57,5 @@ def als(A, k, num_iter):
 	return W, H
 
 if __name__ == '__main__':
-	A = np.matrix([[1, 2], [3, 4]])
-	W, H = als(A, 3, 1)
+	A = np.matrix([[1, 2, 0, 0], [1, 1, 0, 0], [0, 0, 1, 1], [0, 0, 2, 1]])
+	W, H = als(A, 2, 100)

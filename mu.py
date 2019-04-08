@@ -47,6 +47,8 @@ def mu(A, k, num_iter):
 			for j in range(np.size(H, 1)):
 				H[i, j] = H[i, j] * W_TV[i, j] / W_TWH[i, j]
 
+		print("iteration " + n + "...")
+
 	print('A = ')
 	print(A)
 	print('W = ')

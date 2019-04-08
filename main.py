@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+
 from preprocessing import preprocess
 from mu import mu
-from als import als
+from als import *
 import numpy as np
 
 # def printClusters(A, k):
@@ -13,7 +15,7 @@ import numpy as np
 
 if __name__ == '__main__':
 	A, features = preprocess('abcnews-date-text.csv', 'headline_text', 100)
-	W, H = als(A, 10, 1000)
+	W, H = als(A, 10, 100)
 	for i in range(np.size(W, 1)):
 		cluster = []
 		idx = (-W[:,i]).argsort()[:10]

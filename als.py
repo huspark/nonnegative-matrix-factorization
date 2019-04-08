@@ -1,8 +1,11 @@
 import numpy as np
 from numpy.linalg import lstsq
+from anls import nnls_as
 
+def anls(A, k, num_iter):
+  return als(A,k,num_iter, nnls_as)
 
-def als(A, k, num_iter):
+def als(A, k, num_iter, method = 'lstsq'):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
 	Return matrices W, H such that A = WH.
@@ -30,19 +33,22 @@ def als(A, k, num_iter):
 	H = np.ones((k, np.size(A, 1)))
 
 	for n in range(num_iter):
-		# Update H
-		# Solve the least squares problem: argmin_H ||WH - A||
-		H = lstsq(W, A)[0]
-		# Set negative elements of H to 0
-		H[H < 0] = 0
+		if method == 'lstsq':
+			# Update H
+			# Solve the least squares problem: argmin_H ||WH - A||
+			H = lstsq(W, A)[0]
+			# Set negative elements of H to 0
+			H[H < 0] = 0
 
-		# Update W
-		# Solve the least squares problem: argmin_W.T ||H.TW.T - A.T||
-		W = lstsq(H.T, A.T)[0].T
+		        # Update W
+			# Solve the least squares problem: argmin_W.T ||H.TW.T - A.T||
+			W = lstsq(H.T, A.T)[0].T
 
-		# Set negative elements of W to 0
-		W[W < 0] = 0
-
+			# Set negative elements of W to 0
+			W[W < 0] = 0
+		else:
+			H = method(W, A)[0]
+			W = method(H.T, A.T)[0].T
 		print("iteration " + str(n) + "...")
 
 	print('A = ')

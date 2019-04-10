@@ -28,6 +28,8 @@ def als(A, k, num_iter, method = 'lstsq'):
 
 	print('Applying the alternating least squares method on the input matrix...')
 	print('---------------------------------------------------------------------')
+	print('Frobenius norm ||A - WH||_F')
+	print('')
 
 	W = np.random.rand(np.size(A, 0), k)
 	H = np.random.rand(k, np.size(A, 1))
@@ -36,13 +38,13 @@ def als(A, k, num_iter, method = 'lstsq'):
 		if method == 'lstsq':
 			# Update H
 			# Solve the least squares problem: argmin_H ||WH - A||
-			H = lstsq(W, A)[0]
+			H = lstsq(W, A, rcond = None)[0]
 			# Set negative elements of H to 0
 			H[H < 0] = 0
 
 		    # Update W
 			# Solve the least squares problem: argmin_W.T ||H.TW.T - A.T||
-			W = lstsq(H.T, A.T)[0].T
+			W = lstsq(H.T, A.T, rcond = None)[0].T
 
 			# Set negative elements of W to 0
 			W[W < 0] = 0
@@ -51,7 +53,7 @@ def als(A, k, num_iter, method = 'lstsq'):
 			W = method(H.T, A.T)[0].T
 
 		frob_norm = np.linalg.norm(A - W @ H, 'fro')
-		print("iteration " + str(n) + ": ||A - WH||_F = " + str(frob_norm))
+		print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
 

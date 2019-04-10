@@ -28,6 +28,8 @@ def mu(A, k, delta, num_iter):
 
 	print('Applying multiplicative updates on the input matrix...')
 	print('---------------------------------------------------------------------')
+	print('Frobenius norm ||A - WH||_F')
+	print('')
 
 	V = A
 	W = np.random.rand(np.size(A, 0), k)
@@ -52,7 +54,7 @@ def mu(A, k, delta, num_iter):
 				W[i, j] = W[i, j] * AH_T[i, j] / WHH_T[i, j]
 
 		frob_norm = np.linalg.norm(A - W @ H, 'fro')
-		print("iteration " + str(n) + ": ||A - WH||_F = " + str(frob_norm))
+		print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
 

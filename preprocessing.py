@@ -32,11 +32,11 @@ def preprocess(filename, col_name, data_frac, num_max_feature):
 	# df = df.sample(frac = data_frac, random_state = 1)
 	df = df.sample(frac = data_frac)
 
-	print('Prerpocessing ' + col_name + ' column of ' + filename + ' file...')
-	print('---------------------------------------------------------------------')
-	print('First few lines of ' + filename +'\n')
-	print(df.head())
-	print('')
+	# print('Prerpocessing ' + col_name + ' column of ' + filename + ' file...')
+	# print('---------------------------------------------------------------------')
+	# print('First few lines of ' + filename +'\n')
+	# print(df.head())
+	# print('')
 
 	# Transform the specified column of the given csv file into a matrix A.
 	# Store the discovered features to features.
@@ -48,16 +48,16 @@ def preprocess(filename, col_name, data_frac, num_max_feature):
 	A = transformer.fit_transform(count_mat).toarray().T
 	features = vectorizer.get_feature_names()
 
-	# Print out results.
-	print('---------------------------------------------------------------------')
-	print(str(np.size(A, 0)) + ' by ' + str(np.size(A, 1)) + ' matrix representing ' + col_name + ' column of ' + filename + ' file\n')
-	print(A)
-	print('')
+	# # Print out results.
+	# print('---------------------------------------------------------------------')
+	# print(str(np.size(A, 0)) + ' by ' + str(np.size(A, 1)) + ' matrix representing ' + col_name + ' column of ' + filename + ' file\n')
+	# print(A)
+	# print('')
 
-	print('---------------------------------------------------------------------')
-	print(str(len(features)) + ' features of ' + col_name + ' column of ' + filename + ' file\n')
-	print(features)
-	print('')
+	# print('---------------------------------------------------------------------')
+	# print(str(len(features)) + ' features of ' + col_name + ' column of ' + filename + ' file\n')
+	# print(features)
+	# print('')
 
 	return A, features
 

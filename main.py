@@ -7,13 +7,19 @@ from sklearn.decomposition import NMF
 
 
 def printClusters(W, features, cluster_size):
-	sorted_W = W[:, np.argsort(W.sum(axis=0))]
+	print('---------------------------------------------------------------------')
+	print('Discovered clusters')
+	print('')
+
+	sorted_W = W[:, np.argsort(W.sum(axis = 0))]
 	for i in range(np.size(W, 1)):
 		cluster = []
 		idx = (-sorted_W[:,i]).argsort()[:cluster_size]
 		for j in range(np.size(idx)):
 			cluster.append(features[idx[j]])
-		print(cluster)
+		print('Cluster ' + str(i + 1) + ': ' + ', '.join(cluster))
+
+	print('')
 
 
 
@@ -24,7 +30,7 @@ if __name__ == '__main__':
 	num_clusters = 5
 	num_iter = 10
 	cluster_size = 10
-	method = 'mu'
+	method = 'als'
 
 	# Preprocess the dataset
 	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = data_frac, num_max_feature = num_max_feature)

@@ -1,6 +1,8 @@
+#!/usr/bin/env python3
+
 from preprocessing import preprocess
 from mu import mu
-from als import als
+from als import *
 import numpy as np
 from sklearn.decomposition import NMF
 from sklearn.feature_extraction.text import CountVectorizer
@@ -29,6 +31,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 #     return pd.DataFrame(word_dict);
 
 if __name__ == '__main__':
+
 	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = 0.01, num_max_feature = 1000)
 
 	model = NMF(n_components=10, init='nndsvd')

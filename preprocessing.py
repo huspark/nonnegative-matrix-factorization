@@ -2,7 +2,6 @@ import numpy as np
 import pandas as pd
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
-from sklearn.preprocessing import normalize
 from sklearn.decomposition import NMF
 
 
@@ -14,12 +13,14 @@ def preprocess(filename, col_name, data_frac, num_max_feature):
 	Parameters:
 		filename: str
 		col_name: str
+		data_frac: float
+			- float in [0, 1], specifying the fraction of data we will be using
 		max_feature_num: int
 			- integer specifing the maximum number of extracted features
 
 	Returns:
 		A: ndarray
-			- (# of datapoints) by (# of features) ndarray that will be used for NMF
+			- (# of features) by (# of datapoints) ndarray that will be used for NMF
 		features: list
 			- list with length of (# of features) containing strings of extracted features
 	'''
@@ -43,6 +44,7 @@ def preprocess(filename, col_name, data_frac, num_max_feature):
 	vectorizer = CountVectorizer(max_features = num_max_feature, stop_words = 'english')
 	count_mat = vectorizer.fit_transform(headlines)
 	transformer = TfidfTransformer(smooth_idf=False)
+
 	A = transformer.fit_transform(count_mat).toarray().T
 	features = vectorizer.get_feature_names()
 

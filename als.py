@@ -29,8 +29,8 @@ def als(A, k, num_iter, method = 'lstsq'):
 	print('Applying the alternating least squares method on the input matrix...')
 	print('---------------------------------------------------------------------')
 
-	W = np.ones((np.size(A, 0), k))
-	H = np.ones((k, np.size(A, 1)))
+	W = np.random.rand(np.size(A, 0), k)
+	H = np.random.rand(k, np.size(A, 1))
 
 	for n in range(num_iter):
 		if method == 'lstsq':
@@ -40,7 +40,7 @@ def als(A, k, num_iter, method = 'lstsq'):
 			# Set negative elements of H to 0
 			H[H < 0] = 0
 
-		        # Update W
+		    # Update W
 			# Solve the least squares problem: argmin_W.T ||H.TW.T - A.T||
 			W = lstsq(H.T, A.T)[0].T
 
@@ -49,16 +49,9 @@ def als(A, k, num_iter, method = 'lstsq'):
 		else:
 			H = method(W, A)[0]
 			W = method(H.T, A.T)[0].T
-		print("iteration " + str(n) + "...")
 
-	print('A = ')
-	print(A)
-	print('W = ')
-	print(W)
-	print('H = ')
-	print(H)
-	print('W * H = ')
-	print(W @ H)
+		frob_norm = np.linalg.norm(A - W @ H, 'fro')
+		print("iteration " + str(n) + ": ||A - WH||_F = " + str(frob_norm))
 
 	return W, H
 

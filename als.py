@@ -1,11 +1,54 @@
 import numpy as np
 from numpy.linalg import lstsq
-from anls import nnls_as
 
-def anls(A, k, num_iter):
-  return als(A,k,num_iter, nnls_as)
 
-def als(A, k, num_iter, method = 'lstsq'):
+def nls_as_matrix_vector(B, b, eps):
+	n = np.size(B,1)
+
+	# Initialize variables
+	g = np.zeros(n)
+	E = np.ones (n)
+	S = np.zeros(n)
+	w = (B.T).dot(b - B.dot(g))
+
+	w_dot_E = w * E
+	t = np.argmax(w_dot_E)
+	v = w_dot_E[t]
+
+	while np.sum(E) > 0 and v > eps:
+		E[t] = 0
+		S[t] = 1
+		BS = B[:, S > 0]
+		zsol = np.linalg.lstsq(BS, b, rcond = None)[0]
+		zz = np.zeros(n)
+		zz[S > 0] = zsol
+		z = zz + 0
+
+		while np.min(z[S > 0]) <= 0:
+			alpha = np.min((g / (g - z))[(S > 0) * (z <= 0)])
+			g += alpha * (z - g)
+			S[g == 0] = 0
+			E[g == 0] = 1
+			BS = B[:, S > 0]
+			zsol = np.linalg.lstsq(BS, b)[0]
+			zz = np.zeros(n)
+			zz[S > 0] = zsol
+			z = zz + 0
+
+		g = z + 0
+		w = (B.T).dot(b - B.dot(g))
+		w_dot_E = w*E
+		t = np.argmax(w_dot_E)
+		v = w_dot_E[t]
+	return g
+
+
+def nls_as(B, M):
+  eps = 0.00001
+  return [np.array([nls_as_matrix_vector(B, column, eps) for column in M.T]).T]
+
+
+def als(A, k, num_iter, method = ['als', 'anls_as']):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
 	Return matrices W, H such that A = WH.
@@ -35,7 +78,7 @@ def als(A, k, num_iter, method = 'lstsq'):
 	H = np.random.rand(k, np.size(A, 1))
 
 	for n in range(num_iter):
-		if method == 'lstsq':
+		if method == 'als':
 			# Update H
 			# Solve the least squares problem: argmin_H ||WH - A||
 			H = lstsq(W, A, rcond = None)[0]
@@ -48,14 +91,15 @@ def als(A, k, num_iter, method = 'lstsq'):
 
 			# Set negative elements of W to 0
 			W[W < 0] = 0
-		else:
-			H = method(W, A)[0]
-			W = method(H.T, A.T)[0].T
+		elif method == 'anls_as':
+			H = nls_as(W, A)[0]
+			W = nls_as(H.T, A.T)[0].T
 
 		frob_norm = np.linalg.norm(A - W @ H, 'fro')
 		print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
+
 
 if __name__ == '__main__':
 	A = np.matrix([[1, 2, 0, 0], [1, 1, 0, 0], [0, 0, 1, 1], [0, 0, 2, 1]])

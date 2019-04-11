@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.decomposition import NMF
 
 
-
 def printClusters(W, features, cluster_size):
 	print('---------------------------------------------------------------------')
 	print('Discovered clusters')
@@ -22,7 +21,6 @@ def printClusters(W, features, cluster_size):
 	print('')
 
 
-
 if __name__ == '__main__':
 	# Set variables
 	data_frac = 0.01
@@ -30,18 +28,18 @@ if __name__ == '__main__':
 	num_clusters = 5
 	num_iter = 10
 	cluster_size = 10
-	method = 'als'
+	method = 'anls'
 
 	# Preprocess the dataset
-	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = data_frac, num_max_feature = num_max_feature)
+	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = data_frac, random_sample = False, num_max_feature = num_max_feature)
 
 	# Run a desired algorithm to perform non-negative matrix factorization on A
 	if method == 'mu':
 		W, H = mu(A, num_clusters, delta = 0.0000001, num_iter = num_iter)
 	elif method == 'als':
-		W, H = als(A, num_clusters, num_iter = num_iter)
+		W, H = als(A, num_clusters, num_iter = num_iter, method = 'als')
 	elif method == 'anls':
-		W, H = als(A, num_clusters, num_iter = num_iter, method = 'anls')
+		W, H = als(A, num_clusters, num_iter = num_iter, method = 'anls_as')
 	elif method == 'sklearn':
 		model = NMF(n_components = num_clusters, init='nndsvd')
 		W = model.fit_transform(A)

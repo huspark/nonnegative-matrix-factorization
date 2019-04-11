@@ -6,11 +6,26 @@ from sklearn.decomposition import NMF
 
 
 def printClusters(W, features, cluster_size):
+	'''
+	Print clusters found on W.
+	
+	Parameters:
+		W: ndarray
+			- a matrix containing clusters found by non-negative matrix factorization
+		features: list
+			- a list of features
+		cluster_size: int
+			- an integer specifying the number of features in a cluster
+
+	Returns:
+		None
+	'''
 	print('---------------------------------------------------------------------')
 	print('Discovered clusters')
 	print('')
 
 	sorted_W = W[:, np.argsort(W.sum(axis = 0))]
+	
 	for i in range(np.size(W, 1)):
 		cluster = []
 		idx = (-sorted_W[:,i]).argsort()[:cluster_size]

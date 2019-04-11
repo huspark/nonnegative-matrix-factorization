@@ -61,6 +61,8 @@ def als(A, k, num_iter, method = ['als', 'anls_as']):
 			- the resulting matrices W, H will have sizes of m by k and k by n, respectively
 		num_iter: int
 			- number of iterations for the multiplicative updates algorithm
+		method: string
+			- string specifying which method to use to solve least square problems
 
 	Returns:
 		W: ndarray
@@ -69,7 +71,11 @@ def als(A, k, num_iter, method = ['als', 'anls_as']):
 			- k by n matrix where k = dim
 	'''
 
-	print('Applying the alternating least squares method on the input matrix...')
+	if method == 'als':
+		print('Applying the alternating least squares method on the input matrix...')
+	elif method == 'anls_as':
+		print('Applying the alternating non-negative least squares with active set method on the input matrix...')
+
 	print('---------------------------------------------------------------------')
 	print('Frobenius norm ||A - WH||_F')
 	print('')
@@ -78,6 +84,7 @@ def als(A, k, num_iter, method = ['als', 'anls_as']):
 	H = np.random.rand(k, np.size(A, 1))
 
 	for n in range(num_iter):
+		# Use the alternating least squares method to solve LS
 		if method == 'als':
 			# Update H
 			# Solve the least squares problem: argmin_H ||WH - A||
@@ -91,6 +98,8 @@ def als(A, k, num_iter, method = ['als', 'anls_as']):
 
 			# Set negative elements of W to 0
 			W[W < 0] = 0
+
+		# Use the alternating non-negative least squares method with an active set to solve LS
 		elif method == 'anls_as':
 			H = nls_as(W, A)[0]
 			W = nls_as(H.T, A.T)[0].T

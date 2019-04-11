@@ -1,7 +1,6 @@
 import numpy as np
 
 
-
 def mu(A, k, delta, num_iter):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
@@ -57,6 +56,7 @@ def mu(A, k, delta, num_iter):
 		print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
+
 
 if __name__ == '__main__':
 	A = np.matrix([[1, 2, 3], [3, 4, 5]])

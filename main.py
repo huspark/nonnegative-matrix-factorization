@@ -38,6 +38,10 @@ def printClusters(W, features, cluster_size):
 
 if __name__ == '__main__':
 	# Set variables
+	filename = 'abcnews-date-text.csv'
+	#filename = 'USvideos.csv'
+	col_name = 'headline_text'
+	#col_name = 'title'
 	data_frac = 0.01
 	random_sample = True
 	num_max_feature = 1000
@@ -47,7 +51,7 @@ if __name__ == '__main__':
 	method = 'all'
 
 	# Preprocess the dataset
-	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = data_frac, random_sample = random_sample, num_max_feature = num_max_feature)
+	A, features = preprocess(filename = filename, col_name = col_name, data_frac = data_frac, random_sample = random_sample, num_max_feature = num_max_feature)
 
 	# Run a desired algorithm to perform non-negative matrix factorization on A
 	if method == 'all':

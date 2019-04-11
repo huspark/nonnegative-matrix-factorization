@@ -46,7 +46,7 @@ def preprocess(filename, col_name, data_frac, random_sample, num_max_feature, pr
 
 	# Transform the specified column of the given csv file into a matrix A.
 	# Store the discovered features to features.
-	headlines = df['headline_text']
+	headlines = df[col_name]
 	vectorizer = CountVectorizer(max_features = num_max_feature, stop_words = 'english')
 	count_mat = vectorizer.fit_transform(headlines)
 	transformer = TfidfTransformer(smooth_idf=False)
@@ -70,4 +70,4 @@ def preprocess(filename, col_name, data_frac, random_sample, num_max_feature, pr
 
 
 if __name__ == "__main__":
-	preprocess('abcnews-date-text.csv', 'headline_text', 0.01, 1000)
+	preprocess('USvideos.csv', 'title', data_frac = 1, random_sample = False, num_max_feature = 1000, print_enabled = True)

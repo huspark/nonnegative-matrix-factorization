@@ -48,7 +48,7 @@ def nls_as(B, M):
   return [np.array([nls_as_matrix_vector(B, column, eps) for column in M.T]).T]
 
 
-def als(A, k, num_iter, method = ['als', 'anls_as']):
+def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = None):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
 	Return matrices W, H such that A = WH.
@@ -80,8 +80,16 @@ def als(A, k, num_iter, method = ['als', 'anls_as']):
 	print('Frobenius norm ||A - WH||_F')
 	print('')
 
-	W = np.random.rand(np.size(A, 0), k)
-	H = np.random.rand(k, np.size(A, 1))
+	# Initialize W and H
+	if init_W is None:
+		W = np.random.rand(np.size(A, 0), k)
+	else:
+		W = init_W
+
+	if init_H is None:
+		H = np.random.rand(k, np.size(A, 1))
+	else:
+		H = init_H
 
 	for n in range(num_iter):
 		# Use the alternating least squares method to solve LS

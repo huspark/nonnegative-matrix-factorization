@@ -25,7 +25,7 @@ def printClusters(W, features, cluster_size):
 	print('')
 
 	sorted_W = W[:, np.argsort(W.sum(axis = 0))]
-	
+
 	for i in range(np.size(W, 1)):
 		cluster = []
 		idx = (-sorted_W[:,i]).argsort()[:cluster_size]
@@ -39,25 +39,49 @@ def printClusters(W, features, cluster_size):
 if __name__ == '__main__':
 	# Set variables
 	data_frac = 0.01
+	random_sample = True
 	num_max_feature = 1000
 	num_clusters = 5
 	num_iter = 10
 	cluster_size = 10
-	method = 'anls'
+	method = 'all'
 
 	# Preprocess the dataset
-	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = data_frac, random_sample = False, num_max_feature = num_max_feature)
+	A, features = preprocess(filename = 'abcnews-date-text.csv', col_name = 'headline_text', data_frac = data_frac, random_sample = random_sample, num_max_feature = num_max_feature)
 
 	# Run a desired algorithm to perform non-negative matrix factorization on A
-	if method == 'mu':
+	if method == 'all':
+		# Initialize W and H
+		# Use the same matrices for all the algorithms for comparison
+		init_W = np.random.rand(np.size(A, 0), num_clusters)
+		init_H = np.random.rand(num_clusters, np.size(A, 1))
+
+		# Run multiplicative updates with init_W and init_H
+		W, H = mu(A, num_clusters, delta = 0.0000001, num_iter = num_iter, init_W = init_W, init_H = init_H)
+		printClusters(W, features, cluster_size)
+
+		# Run alternating least squares with init_W and init_H
+		W, H = als(A, num_clusters, num_iter = num_iter, method = 'als', init_W = init_W, init_H = init_H)
+		printClusters(W, features, cluster_size)
+
+		# Run alternating non-negative least squares with active set with init_W and init_H
+		W, H = als(A, num_clusters, num_iter = num_iter, method = 'anls_as', init_W = init_W, init_H = init_H)
+		printClusters(W, features, cluster_size)
+
+	elif method == 'mu':
 		W, H = mu(A, num_clusters, delta = 0.0000001, num_iter = num_iter)
+
 	elif method == 'als':
 		W, H = als(A, num_clusters, num_iter = num_iter, method = 'als')
+
 	elif method == 'anls':
 		W, H = als(A, num_clusters, num_iter = num_iter, method = 'anls_as')
+
 	elif method == 'sklearn':
 		model = NMF(n_components = num_clusters, init='nndsvd')
 		W = model.fit_transform(A)
 		H = model.components_
 
-	printClusters(W, features, cluster_size)
+	# Print clusters found by non-negative matrix factorization
+	if method != 'all':
+		printClusters(W, features, cluster_size)

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def mu(A, k, delta, num_iter):
+def mu(A, k, delta, num_iter, init_W = None, init_H = None):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
 	Return matrices W, H such that A = WH.
@@ -17,6 +17,10 @@ def mu(A, k, delta, num_iter):
 			- necessary to avoid division by zero problems
 		num_iter: int
 			- number of iterations for the multiplicative updates algorithm
+		init_W: ndarray
+			- m by k matrix for the initial W
+		init_H: ndarray
+			- k by n matrix for the initial H
 
 	Returns:
 		W: ndarray
@@ -31,8 +35,17 @@ def mu(A, k, delta, num_iter):
 	print('')
 
 	V = A
-	W = np.random.rand(np.size(A, 0), k)
-	H = np.random.rand(k, np.size(A, 1))
+
+	# Initialize W and H
+	if init_W is None:
+		W = np.random.rand(np.size(A, 0), k)
+	else:
+		W = init_W
+
+	if init_H is None:
+		H = np.random.rand(k, np.size(A, 1))
+	else:
+		H = init_H
 
 	for n in range(num_iter):
 

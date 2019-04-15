@@ -1,7 +1,12 @@
 # Nonnegative Matrix Factorization
 
-Expertimental results can be here:
+Expertimental results for k = 5:
 
-[Results for k = 5](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5)
+[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/data)  
+[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/clusters)
 
-[Results for k = 100](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100)
+
+Expertimental results for k = 100:
+
+[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/data)  
+[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/clusters)

@@ -19,7 +19,7 @@ def nls_as_matrix_vector(B, b, eps):
 		E[t] = 0
 		S[t] = 1
 		BS = B[:, S > 0]
-		zsol = np.linalg.lstsq(BS, b, rcond = None)[0]
+		zsol = np.linalg.lstsq(BS, b, rcond = -1)[0]
 		zz = np.zeros(n)
 		zz[S > 0] = zsol
 		z = zz + 0
@@ -96,13 +96,13 @@ def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = Non
 		if method == 'als':
 			# Update H
 			# Solve the least squares problem: argmin_H ||WH - A||
-			H = lstsq(W, A, rcond = None)[0]
+			H = lstsq(W, A, rcond = -1)[0]
 			# Set negative elements of H to 0
 			H[H < 0] = 0
 
 		    # Update W
 			# Solve the least squares problem: argmin_W.T ||H.TW.T - A.T||
-			W = lstsq(H.T, A.T, rcond = None)[0].T
+			W = lstsq(H.T, A.T, rcond = -1)[0].T
 
 			# Set negative elements of W to 0
 			W[W < 0] = 0

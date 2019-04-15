@@ -1,9 +1,8 @@
-from preprocessing import preprocess
+from preprocessing_sport_data import preprocess
 from mu import mu
 from als import *
 import numpy as np
 from sklearn.decomposition import NMF
-
 
 def printClusters(W, features, cluster_size):
 	'''
@@ -38,20 +37,15 @@ def printClusters(W, features, cluster_size):
 
 if __name__ == '__main__':
 	# Set variables
-	filename = 'abcnews-date-text.csv'
-	#filename = 'USvideos.csv'
-	col_name = 'headline_text'
-	#col_name = 'title'
-	data_frac = 0.01
-	random_sample = True
 	num_max_feature = 1000
+	cluster_size = 20
+	num_iter = 500
+
 	num_clusters = 5
-	num_iter = 10
-	cluster_size = 10
 	method = 'all'
 
 	# Preprocess the dataset
-	A, features = preprocess(filename = filename, col_name = col_name, data_frac = data_frac, random_sample = random_sample, num_max_feature = num_max_feature)
+	A, features = preprocess(num_max_feature = num_max_feature)
 
 	# Run a desired algorithm to perform non-negative matrix factorization on A
 	if method == 'all':

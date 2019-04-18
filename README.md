@@ -6,13 +6,19 @@ Currently, this program supports
   * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)[3](https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf)  
 
 ### Results
-Expertimental results for k = 5:
+Experimental results with abcnews-date-test.csv's headline_text  
+Multiplicative Updates (MU):  
+
+Alternating Least Squares (ALS):  
+
+
+Experimental results with bbcsports.csv and k = 5:  
 
 [Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/data)  
 [Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/clusters)
 
 
-Expertimental results for k = 100:
+Expertimental results for k = 100:  
 
 [Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/data)  
 [Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/clusters)

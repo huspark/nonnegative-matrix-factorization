@@ -12,16 +12,16 @@ Multiplicative Updates (MU):
 Alternating Least Squares (ALS):  
 <img src="/experimental_results/abc_als.png">  
 
-Experimental results with bbcsports.csv and k = 5:  
+Experimental results with bbcsports dataset and k = 5:  
 
-[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/data)  
-[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/clusters)
+[Data](/experimental_results/k5/data)  
+[Clusters](/experimental_results/k5/clusters)
 
 
-Expertimental results for k = 100:  
+Expertimental results with bbcsports dataset and k = 100:  
 
-[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/data)  
-[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/clusters)
+[Data](/experimental_results/k100/data)  
+[Clusters](/experimental_results/k100/clusters)
 
 ### How to Run
 * Usage: main.py [-h] -f FILENAME -c COL_NAME -m {sklearn,all,als,anls,mu}

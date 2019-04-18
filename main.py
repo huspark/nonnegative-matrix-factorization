@@ -1,10 +1,16 @@
-from preprocessing_sport_data import preprocess
-from mu import mu
-from als import *
+import sys
+import argparse
+
 import numpy as np
 from sklearn.decomposition import NMF
 
-def printClusters(W, features, cluster_size):
+from preprocessing import preprocess
+from preprocessing_sport_data import preprocess_bbcsport
+from mu import mu
+from als import *
+
+
+def print_clusters(W, features, cluster_size):
 	'''
 	Print clusters found on W.
 	
@@ -35,51 +41,94 @@ def printClusters(W, features, cluster_size):
 	print('')
 
 
-if __name__ == '__main__':
-	# Set variables
-	num_max_feature = 1000
-	cluster_size = 20
-	num_iter = 500
+def process_arg():
+	'''
+	Process the user input.
 
-	num_clusters = 5
-	method = 'all'
+	Parameters:
+		None
 
-	# Preprocess the dataset
-	A, features = preprocess(num_max_feature = num_max_feature)
+	Returns:
+		args: argparse.Namespace()
+	'''
+	parser = argparse.ArgumentParser(description = "This program applies a nonnegative matrix factorization algorithms to a dataset for clustering.")
+	parser.add_argument('-f', '--filename', type = str, required = True,  help = 'the input file name')
+	parser.add_argument('-c', '--col_name', type = str, required = True,  help = 'the column of the input csv file for nonnegative matrix factorization.')
+	parser.add_argument('-m', '--method', choices = {'all', 'mu', 'als', 'anls', 'sklearn'}, type = str, required = True,  help = 'the NMF method to apply')
+	parser.add_argument('-d', '--data_frac', default = 1, type = float, required = False, help = 'the amount of the data to be used')
+	parser.add_argument('-r', '--random_sample', default = True, type = bool, required = False,  help = 'if set False, disables random sampling of the data')
+	parser.add_argument('-n', '--num_max_feature', default = 1000, type = float, required = False,  help = 'the maximum number of features to be discovered in the dataset')
+	parser.add_argument('-s', '--cluster_size', default = 10, type = float, required = False,  help = 'the number of features in each cluster')
+	parser.add_argument('-k', '--num_clusters', default = 5, type = float, required = False,  help = 'the number of clusters to be discovered')
+	parser.add_argument('-i', '--num_iters', default = 100, type = float, required = False,  help = 'the number of iterations to run a NMF algorithm')
+	parser.add_argument('-p', '--print_enabled', default = False, type = bool, required = False,  help = 'if ture, output print statements')
 
+	args = parser.parse_args()
+
+	return args
+
+
+def process_NMF(args, A, features):
+	'''
+	Using a specified algorithm by user, apply nonnegative matrix factorization to the given matrix A.
+	Based on the factorization, print clusters.
+
+	Paramters:
+		args: Namespace
+			- contains the arguments from the user
+		A:
+			- the matrix to factorize
+		features:
+			- discovered features of the input matrix
+	Returns:
+		None
+	'''
 	# Run a desired algorithm to perform non-negative matrix factorization on A
-	if method == 'all':
+	if args.method == 'all':
 		# Initialize W and H
 		# Use the same matrices for all the algorithms for comparison
-		init_W = np.random.rand(np.size(A, 0), num_clusters)
-		init_H = np.random.rand(num_clusters, np.size(A, 1))
+		init_W = np.random.rand(np.size(A, 0), args.num_clusters)
+		init_H = np.random.rand(args.num_clusters, np.size(A, 1))
 
 		# Run multiplicative updates with init_W and init_H
-		W, H = mu(A, num_clusters, delta = 0.0000001, num_iter = num_iter, init_W = init_W, init_H = init_H)
-		printClusters(W, features, cluster_size)
+		W, H = mu(A, args.num_clusters, delta = 0.0000001, num_iter = args.num_iters, init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
+		print_clusters(W, features, args.cluster_size)
 
 		# Run alternating least squares with init_W and init_H
-		W, H = als(A, num_clusters, num_iter = num_iter, method = 'als', init_W = init_W, init_H = init_H)
-		printClusters(W, features, cluster_size)
+		W, H = als(A, num_clusters, num_iter = args.num_iters, method = 'als', init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
+		print_clusters(W, features, args.cluster_size)
 
 		# Run alternating non-negative least squares with active set with init_W and init_H
-		W, H = als(A, num_clusters, num_iter = num_iter, method = 'anls_as', init_W = init_W, init_H = init_H)
-		printClusters(W, features, cluster_size)
+		W, H = als(A, args.num_clusters, num_iter = args.num_iters, method = 'anls_as', init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
+		print_clusters(W, features, args.cluster_size)
 
-	elif method == 'mu':
-		W, H = mu(A, num_clusters, delta = 0.0000001, num_iter = num_iter)
+	elif args.method == 'mu':
+		W, H = mu(A, args.num_clusters, delta = 0.0000001, num_iter = args.num_iters, print_enabled = args.print_enabled)
 
-	elif method == 'als':
-		W, H = als(A, num_clusters, num_iter = num_iter, method = 'als')
+	elif args.method == 'als':
+		W, H = als(A, args.num_clusters, num_iter = args.num_iters, method = 'als', print_enabled = args.print_enabled)
 
-	elif method == 'anls':
-		W, H = als(A, num_clusters, num_iter = num_iter, method = 'anls_as')
+	elif args.method == 'anls':
+		W, H = als(A, args.num_clusters, num_iter = args.num_iters, method = 'anls_as', print_enabled = args.print_enabled)
 
-	elif method == 'sklearn':
-		model = NMF(n_components = num_clusters, init='nndsvd')
+	elif args.method == 'sklearn':
+		model = NMF(n_components = args.num_clusters, init='nndsvd')
 		W = model.fit_transform(A)
 		H = model.components_
 
 	# Print clusters found by non-negative matrix factorization
-	if method != 'all':
-		printClusters(W, features, cluster_size)
+	if args.method != 'all':
+		print_clusters(W, features, args.cluster_size)
+
+
+if __name__ == '__main__':
+	# Process arguments
+	args = process_arg()
+
+	# Preprocess the dataset
+	try: 
+		A, features = preprocess(args.filename, args.col_name, data_frac = args.data_frac, random_sample = args.random_sample, num_max_feature = args.num_max_feature, print_enabled = args.print_enabled)
+	except FileNotFoundError:
+		sys.exit("Error: File/Column not found")
+
+	process_NMF(args, A, features)

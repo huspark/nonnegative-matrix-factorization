@@ -5,7 +5,7 @@ from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.decomposition import NMF
 import glob
 
-def preprocess(num_max_feature, print_enabled = True):
+def preprocess_bbcsport(num_max_feature, print_enabled = True):
 	''' 
 	Preprocess a column of a csv file for nonnegative matrix factorization.
 

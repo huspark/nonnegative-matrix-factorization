@@ -48,7 +48,7 @@ def nls_as(B, M):
   return [np.array([nls_as_matrix_vector(B, column, eps) for column in M.T]).T]
 
 
-def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = None):
+def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = None, print_enabled = False):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
 	Return matrices W, H such that A = WH.
@@ -63,6 +63,8 @@ def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = Non
 			- number of iterations for the multiplicative updates algorithm
 		method: string
 			- string specifying which method to use to solve least square problems
+		print_enabled: boolean
+			- if ture, output print statements
 
 	Returns:
 		W: ndarray
@@ -76,9 +78,10 @@ def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = Non
 	elif method == 'anls_as':
 		print('Applying the alternating non-negative least squares with active set method on the input matrix...')
 
-	print('---------------------------------------------------------------------')
-	print('Frobenius norm ||A - WH||_F')
-	print('')
+	if print_enabled:
+		print('---------------------------------------------------------------------')
+		print('Frobenius norm ||A - WH||_F')
+		print('')
 
 	# Initialize W and H
 	if init_W is None:
@@ -112,8 +115,9 @@ def als(A, k, num_iter, method = ['als', 'anls_as'], init_W = None, init_H = Non
 			H = nls_as(W, A)[0]
 			W = nls_as(H.T, A.T)[0].T
 
-		frob_norm = np.linalg.norm(A - W @ H, 'fro')
-		print("iteration " + str(n + 1) + ": " + str(frob_norm))
+		if print_enabled:
+			frob_norm = np.linalg.norm(A - W @ H, 'fro')
+			print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
 

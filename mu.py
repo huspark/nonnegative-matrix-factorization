@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def mu(A, k, delta, num_iter, init_W = None, init_H = None):
+def mu(A, k, delta, num_iter, init_W = None, init_H = None, print_enabled = False):
 	'''
 	Run multiplicative updates to perform nonnegative matrix factorization on A.
 	Return matrices W, H such that A = WH.
@@ -21,6 +21,8 @@ def mu(A, k, delta, num_iter, init_W = None, init_H = None):
 			- m by k matrix for the initial W
 		init_H: ndarray
 			- k by n matrix for the initial H
+		print_enabled: boolean
+			- if ture, output print statements
 
 	Returns:
 		W: ndarray
@@ -30,9 +32,11 @@ def mu(A, k, delta, num_iter, init_W = None, init_H = None):
 	'''
 
 	print('Applying multiplicative updates on the input matrix...')
-	print('---------------------------------------------------------------------')
-	print('Frobenius norm ||A - WH||_F')
-	print('')
+
+	if print_enabled:
+		print('---------------------------------------------------------------------')
+		print('Frobenius norm ||A - WH||_F')
+		print('')
 
 	V = A
 
@@ -65,8 +69,9 @@ def mu(A, k, delta, num_iter, init_W = None, init_H = None):
 			for j in range(np.size(W, 1)):
 				W[i, j] = W[i, j] * AH_T[i, j] / WHH_T[i, j]
 
-		frob_norm = np.linalg.norm(A - W @ H, 'fro')
-		print("iteration " + str(n + 1) + ": " + str(frob_norm))
+		if print_enabled:
+			frob_norm = np.linalg.norm(A - W @ H, 'fro')
+			print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
 

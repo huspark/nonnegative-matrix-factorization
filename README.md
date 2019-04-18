@@ -50,9 +50,9 @@ Expertimental results for k = 100:
     if ture, output print statements  
 
 ### Citation
-Algorithms for Non-negative Matrix Factorizations,  
+Algorithms for Non-negative Matrix Factorizations by D. Lee and H. Seung,  
 https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf  
-Algorithms and applications for approximate nonnegative matrix factorization,  
+Algorithms and applications for approximate nonnegative matrix factorization by M. Berry,  
 https://www.sciencedirect.com/science/article/pii/S0167947306004191  
-Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method,  
+Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method by H. Kim and H. Park,  
 https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf  

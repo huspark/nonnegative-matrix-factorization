@@ -6,8 +6,36 @@ Currently, this program supports
   * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)
 
 ### How to Run
-In main.py, set desired values to variables.  
-Run main.py.
+* Usage: main.py [-h] -f FILENAME -c COL_NAME -m {sklearn,all,als,anls,mu}
+               [-d DATA_FRAC] [-r RANDOM_SAMPLE] [-n NUM_MAX_FEATURE]
+               [-s CLUSTER_SIZE] [-k NUM_CLUSTERS] [-i NUM_ITERS]
+               [-p PRINT_ENABLED]  
+
+* Required arguments:  
+  * -f FILENAME, --filename FILENAME  
+    the input file name  
+  * -c COL_NAME, --col_name COL_NAME  
+    the column of the input csv file for nonnegative matrix factorization.  
+  * -m {sklearn,all,als,anls,mu}, --method {sklearn,all,als,anls,mu}  
+    the NMF method to apply  
+
+* Optional arguments:  
+  * -h, --help  
+    show this help message and exit  
+  * -d DATA_FRAC, --data_frac DATA_FRAC  
+    the amount of the data to be used  
+  * -r RANDOM_SAMPLE, --random_sample RANDOM_SAMPLE  
+    if set False, disables random sampling of the data  
+  * -n NUM_MAX_FEATURE, --num_max_feature NUM_MAX_FEATURE  
+    the maximum number of features to be discovered in the dataset  
+  * -s CLUSTER_SIZE, --cluster_size CLUSTER_SIZE  
+    the number of features in each cluster  
+  * -k NUM_CLUSTERS, --num_clusters NUM_CLUSTERS  
+    the number of clusters to be discovered  
+  * -i NUM_ITERS, --num_iters NUM_ITERS  
+    the number of iterations to run a NMF algorithm  
+  * -p PRINT_ENABLED, --print_enabled PRINT_ENABLED  
+    if ture, output print statements  
 
 ### Results
 Expertimental results for k = 5:

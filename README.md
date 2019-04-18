@@ -5,6 +5,18 @@ Currently, this program supports
   * Alternating Least Squares (ALS)
   * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)
 
+### Results
+Expertimental results for k = 5:
+
+[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/data)  
+[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/clusters)
+
+
+Expertimental results for k = 100:
+
+[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/data)  
+[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/clusters)
+
 ### How to Run
 * Usage: main.py [-h] -f FILENAME -c COL_NAME -m {sklearn,all,als,anls,mu}
                [-d DATA_FRAC] [-r RANDOM_SAMPLE] [-n NUM_MAX_FEATURE]
@@ -37,16 +49,10 @@ Currently, this program supports
   * -p PRINT_ENABLED, --print_enabled PRINT_ENABLED  
     if ture, output print statements  
 
-### Results
-Expertimental results for k = 5:
-
-[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/data)  
-[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k5/clusters)
-
-
-Expertimental results for k = 100:
-
-[Data](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/data)  
-[Clusters generated](https://github.com/hpark95/Nonnegative-Matrix-Factorization/tree/master/experimental_results/k100/clusters)
-
 ### Citation
+Algorithms for Non-negative Matrix Factorizations,  
+https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf  
+Algorithms and applications for approximate nonnegative matrix factorization,  
+https://www.sciencedirect.com/science/article/pii/S0167947306004191  
+Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method,  
+https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf  

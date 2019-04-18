@@ -8,9 +8,9 @@ Currently, this program supports
 ### Results
 Experimental results with abcnews-date-test.csv's headline_text  
 Multiplicative Updates (MU):  
-
+<img src="/experimental_results/abc_mu.png">  
 Alternating Least Squares (ALS):  
-
+<img src="/experimental_results/abc_als.png">  
 
 Experimental results with bbcsports.csv and k = 5:  
 

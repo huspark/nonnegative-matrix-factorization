@@ -1,5 +1,5 @@
 ## Nonnegative Matrix Factorization
-NMF is A python program that applies a choice of NMF(nonnegative matrix factorization) algorithms to a dataset for clustering.  
+NMF is a python program that applies a choice of NMF(nonnegative matrix factorization) algorithms to a dataset for clustering.  
 Currently, this program supports
   * Multiplicative Updates (MU)[1](https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf)  
   * Alternating Least Squares (ALS)[2](https://www.sciencedirect.com/science/article/pii/S0167947306004191)  

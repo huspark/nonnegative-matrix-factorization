@@ -8,20 +8,9 @@ Currently, this program supports
 ### Results
 Experimental results with abcnews-date-test.csv's headline_text  
 Multiplicative Updates (MU):  
-<img src="/experimental_results/abc_mu.png">  
+<img src="/sample_result/abc_mu.png">  
 Alternating Least Squares (ALS):  
-<img src="/experimental_results/abc_als.png">  
-
-Experimental results with bbcsports dataset and k = 5:  
-
-[Data](/experimental_results/k5/data)  
-[Clusters](/experimental_results/k5/clusters)
-
-
-Expertimental results with bbcsports dataset and k = 100:  
-
-[Data](/experimental_results/k100/data)  
-[Clusters](/experimental_results/k100/clusters)
+<img src="/sample_result/abc_als.png">  
 
 ### How to Run
 * Usage: main.py [-h] -f FILENAME -c COL_NAME -m {sklearn,all,als,anls,mu}
@@ -34,7 +23,7 @@ Expertimental results with bbcsports dataset and k = 100:
     the input file name  
   * -c COL_NAME, --col_name COL_NAME  
     the column of the input csv file for nonnegative matrix factorization.  
-  * -m {sklearn,all,als,anls,mu}, --method {sklearn,all,als,anls,mu}  
+  * -m {sklearn,all,als,anls_as,mu}, --method {sklearn,all,als,anls_as,mu}  
     the NMF method to apply  
 
 * Optional arguments:  
@@ -62,3 +51,5 @@ Algorithms and applications for approximate nonnegative matrix factorization by 
 https://www.sciencedirect.com/science/article/pii/S0167947306004191  
 Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method by H. Kim and H. Park,  
 https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf  
+Fast Nonnegative Matrix Factorization: An Active-Set-Like Method and Comparisons,  
+https://www.cc.gatech.edu/~hpark/papers/SISC_082117RR_Kim_Park.pdf  

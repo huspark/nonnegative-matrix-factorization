@@ -3,7 +3,7 @@ NMF is a python program that applies a choice of nonnegative matrix factorizatio
 Currently, this program supports
   * Multiplicative Updates (MU)[1](https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf)  
   * Alternating Least Squares (ALS)[2](https://www.sciencedirect.com/science/article/pii/S0167947306004191)  
-  * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)[3](https://epubs.siam.org/doi/pdf/10.1137/07069239X?casa_token=uh9_uTDvfHIAAAAA:GzOP1sjKEXZPtEuO4CEN_6Z6M1kjAVDmz13-D2PPP_2tt2rKDHCyQPcOPrMkaORj6cWvWU4Png)  
+  * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)[3](https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf)  
 
 ### Results
 Experimental results with abcnews-date-test.csv's headline_text  
@@ -50,4 +50,6 @@ https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorizati
 Algorithms and applications for approximate nonnegative matrix factorization by M. Berry,  
 https://www.sciencedirect.com/science/article/pii/S0167947306004191  
 Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method by H. Kim and H. Park,  
-https://epubs.siam.org/doi/pdf/10.1137/07069239X?casa_token=uh9_uTDvfHIAAAAA:GzOP1sjKEXZPtEuO4CEN_6Z6M1kjAVDmz13-D2PPP_2tt2rKDHCyQPcOPrMkaORj6cWvWU4Png 
+https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf
+Fast Nonnegative Matrix Factorization: An Active-Set-Like Method and Comparisons,
+https://www.cc.gatech.edu/~hpark/papers/SISC_082117RR_Kim_Park.pdf

@@ -6,8 +6,9 @@ from sklearn.decomposition import NMF
 
 from preprocessing import preprocess
 from preprocessing_sport_data import preprocess_bbcsport
-from mu import mu
+from mu import *
 from als import *
+from anls_as import anls_as
 
 
 def print_clusters(W, features, cluster_size):
@@ -54,7 +55,7 @@ def process_arg():
 	parser = argparse.ArgumentParser(description = "This program applies a nonnegative matrix factorization algorithms to a dataset for clustering.")
 	parser.add_argument('-f', '--filename', type = str, required = True,  help = 'the input file name')
 	parser.add_argument('-c', '--col_name', type = str, required = True,  help = 'the column of the input csv file for nonnegative matrix factorization.')
-	parser.add_argument('-m', '--method', choices = {'all', 'mu', 'als', 'anls', 'sklearn'}, type = str, required = True,  help = 'the NMF method to apply')
+	parser.add_argument('-m', '--method', default = 'mu', choices = {'all', 'mu', 'als', 'anls_as', 'sklearn'}, type = str, required = True,  help = 'the NMF method to apply')
 	parser.add_argument('-d', '--data_frac', default = 1, type = float, required = False, help = 'the amount of the data to be used')
 	parser.add_argument('-r', '--random_sample', default = True, type = bool, required = False,  help = 'if set False, disables random sampling of the data')
 	parser.add_argument('-n', '--num_max_feature', default = 1000, type = float, required = False,  help = 'the maximum number of features to be discovered in the dataset')
@@ -95,21 +96,21 @@ def process_NMF(args, A, features):
 		print_clusters(W, features, args.cluster_size)
 
 		# Run alternating least squares with init_W and init_H
-		W, H = als(A, num_clusters, num_iter = args.num_iters, method = 'als', init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
+		W, H = als(A, num_clusters, num_iter = args.num_iters, init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
 		print_clusters(W, features, args.cluster_size)
 
 		# Run alternating non-negative least squares with active set with init_W and init_H
-		W, H = als(A, args.num_clusters, num_iter = args.num_iters, method = 'anls_as', init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
+		W, H = anls_as(A, args.num_clusters, num_iter = args.num_iters, init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
 		print_clusters(W, features, args.cluster_size)
 
 	elif args.method == 'mu':
 		W, H = mu(A, args.num_clusters, delta = 0.0000001, num_iter = args.num_iters, print_enabled = args.print_enabled)
 
 	elif args.method == 'als':
-		W, H = als(A, args.num_clusters, num_iter = args.num_iters, method = 'als', print_enabled = args.print_enabled)
+		W, H = als(A, args.num_clusters, num_iter = args.num_iters, print_enabled = args.print_enabled)
 
-	elif args.method == 'anls':
-		W, H = als(A, args.num_clusters, num_iter = args.num_iters, method = 'anls_as', print_enabled = args.print_enabled)
+	elif args.method == 'anls_as':
+		W, H = anls_as(A, args.num_clusters, num_iter = args.num_iters, print_enabled = args.print_enabled)
 
 	elif args.method == 'sklearn':
 		model = NMF(n_components = args.num_clusters, init='nndsvd')

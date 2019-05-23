@@ -51,6 +51,7 @@ def mu(A, k, delta, num_iter, init_W = None, init_H = None, print_enabled = Fals
 	else:
 		H = init_H
 
+	# Decompose the input matrix
 	for n in range(num_iter):
 
 		# Update H

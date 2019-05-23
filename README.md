@@ -23,7 +23,7 @@ Alternating Least Squares (ALS):
     the input file name  
   * -c COL_NAME, --col_name COL_NAME  
     the column of the input csv file for nonnegative matrix factorization.  
-  * -m {sklearn,all,als,anls,mu}, --method {sklearn,all,als,anls,mu}  
+  * -m {sklearn,all,als,anls_as,mu}, --method {sklearn,all,als,anls_as,mu}  
     the NMF method to apply  
 
 * Optional arguments:  
@@ -50,6 +50,6 @@ https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorizati
 Algorithms and applications for approximate nonnegative matrix factorization by M. Berry,  
 https://www.sciencedirect.com/science/article/pii/S0167947306004191  
 Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method by H. Kim and H. Park,  
-https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf
-Fast Nonnegative Matrix Factorization: An Active-Set-Like Method and Comparisons,
-https://www.cc.gatech.edu/~hpark/papers/SISC_082117RR_Kim_Park.pdf
+https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf  
+Fast Nonnegative Matrix Factorization: An Active-Set-Like Method and Comparisons,  
+https://www.cc.gatech.edu/~hpark/papers/SISC_082117RR_Kim_Park.pdf  

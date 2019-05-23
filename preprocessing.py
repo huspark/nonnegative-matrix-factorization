@@ -70,4 +70,3 @@ def preprocess(filename, col_name, data_frac, random_sample, num_max_feature, pr
 
 
 if __name__ == "__main__":
-	preprocess('USvideos.csv', 'title', data_frac = 1, random_sample = False, num_max_feature = 1000, print_enabled = True)

@@ -78,5 +78,3 @@ def mu(A, k, delta, num_iter, init_W = None, init_H = None, print_enabled = Fals
 
 
 if __name__ == '__main__':
-	A = np.matrix([[1, 2, 3], [3, 4, 5]])
-	W, H = mu(A, 3, 0.001, 100)

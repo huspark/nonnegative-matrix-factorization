@@ -66,5 +66,3 @@ def als(A, k, num_iter, init_W = None, init_H = None, print_enabled = False):
 
 
 if __name__ == '__main__':
-	A = np.matrix([[1, 2, 0, 0], [1, 1, 0, 0], [0, 0, 1, 1], [0, 0, 2, 1]])
-	W, H = als(A, 2, 100)

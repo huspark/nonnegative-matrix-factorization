@@ -3,25 +3,14 @@ NMF is a python program that applies a choice of nonnegative matrix factorizatio
 Currently, this program supports
   * Multiplicative Updates (MU)[1](https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorization.pdf)  
   * Alternating Least Squares (ALS)[2](https://www.sciencedirect.com/science/article/pii/S0167947306004191)  
-  * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)[3](https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf)  
+  * Alternating Nonnegative Least Squares with Active Set (ANLS - AS)[3](https://epubs.siam.org/doi/pdf/10.1137/07069239X?casa_token=uh9_uTDvfHIAAAAA:GzOP1sjKEXZPtEuO4CEN_6Z6M1kjAVDmz13-D2PPP_2tt2rKDHCyQPcOPrMkaORj6cWvWU4Png)  
 
 ### Results
 Experimental results with abcnews-date-test.csv's headline_text  
 Multiplicative Updates (MU):  
-<img src="/experimental_results/abc_mu.png">  
+<img src="/sample_results/abc_mu.png">  
 Alternating Least Squares (ALS):  
-<img src="/experimental_results/abc_als.png">  
-
-Experimental results with bbcsports dataset and k = 5:  
-
-[Data](/experimental_results/k5/data)  
-[Clusters](/experimental_results/k5/clusters)
-
-
-Expertimental results with bbcsports dataset and k = 100:  
-
-[Data](/experimental_results/k100/data)  
-[Clusters](/experimental_results/k100/clusters)
+<img src="/sample_results/abc_als.png">  
 
 ### How to Run
 * Usage: main.py [-h] -f FILENAME -c COL_NAME -m {sklearn,all,als,anls,mu}
@@ -61,4 +50,4 @@ https://papers.nips.cc/paper/1861-algorithms-for-non-negative-matrix-factorizati
 Algorithms and applications for approximate nonnegative matrix factorization by M. Berry,  
 https://www.sciencedirect.com/science/article/pii/S0167947306004191  
 Non-negative Matrix Factorization Based on Alternating Non-negativity Constrained Least Squares and ActiveSet Method by H. Kim and H. Park,  
-https://www.cc.gatech.edu/~hpark/papers/simax-nmf.pdf  
+https://epubs.siam.org/doi/pdf/10.1137/07069239X?casa_token=uh9_uTDvfHIAAAAA:GzOP1sjKEXZPtEuO4CEN_6Z6M1kjAVDmz13-D2PPP_2tt2rKDHCyQPcOPrMkaORj6cWvWU4Png 

@@ -8,9 +8,9 @@ Currently, this program supports
 ### Results
 Experimental results with abcnews-date-test.csv's headline_text  
 Multiplicative Updates (MU):  
-<img src="/sample_results/abc_mu.png">  
+<img src="/sample_result/abc_mu.png">  
 Alternating Least Squares (ALS):  
-<img src="/sample_results/abc_als.png">  
+<img src="/sample_result/abc_als.png">  
 
 ### How to Run
 * Usage: main.py [-h] -f FILENAME -c COL_NAME -m {sklearn,all,als,anls,mu}

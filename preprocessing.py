@@ -67,6 +67,3 @@ def preprocess(filename, col_name, data_frac, random_sample, num_max_feature, pr
 		print('')
 
 	return A, features
-
-
-if __name__ == "__main__":

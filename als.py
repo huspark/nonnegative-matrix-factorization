@@ -63,6 +63,3 @@ def als(A, k, num_iter, init_W = None, init_H = None, print_enabled = False):
 			print("iteration " + str(n + 1) + ": " + str(frob_norm))
 
 	return W, H
-
-
-if __name__ == '__main__':

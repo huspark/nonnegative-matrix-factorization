@@ -5,7 +5,6 @@ import numpy as np
 from sklearn.decomposition import NMF
 
 from preprocessing import preprocess
-from preprocessing_sport_data import preprocess_bbcsport
 from mu import *
 from als import *
 from anls_as import anls_as
@@ -58,10 +57,10 @@ def process_arg():
 	parser.add_argument('-m', '--method', default = 'mu', choices = {'all', 'mu', 'als', 'anls_as', 'sklearn'}, type = str, required = True,  help = 'the NMF method to apply')
 	parser.add_argument('-d', '--data_frac', default = 1, type = float, required = False, help = 'the amount of the data to be used')
 	parser.add_argument('-r', '--random_sample', default = True, type = bool, required = False,  help = 'if set False, disables random sampling of the data')
-	parser.add_argument('-n', '--num_max_feature', default = 1000, type = float, required = False,  help = 'the maximum number of features to be discovered in the dataset')
-	parser.add_argument('-s', '--cluster_size', default = 10, type = float, required = False,  help = 'the number of features in each cluster')
-	parser.add_argument('-k', '--num_clusters', default = 5, type = float, required = False,  help = 'the number of clusters to be discovered')
-	parser.add_argument('-i', '--num_iters', default = 100, type = float, required = False,  help = 'the number of iterations to run a NMF algorithm')
+	parser.add_argument('-n', '--num_max_feature', default = 1000, type = int, required = False,  help = 'the maximum number of features to be discovered in the dataset')
+	parser.add_argument('-s', '--cluster_size', default = 10, type = int, required = False,  help = 'the number of features in each cluster')
+	parser.add_argument('-k', '--num_clusters', default = 5, type = int, required = False,  help = 'the number of clusters to be discovered')
+	parser.add_argument('-i', '--num_iters', default = 100, type = int, required = False,  help = 'the number of iterations to run a NMF algorithm')
 	parser.add_argument('-p', '--print_enabled', default = False, type = bool, required = False,  help = 'if ture, output print statements')
 
 	args = parser.parse_args()

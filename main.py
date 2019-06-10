@@ -95,7 +95,7 @@ def process_NMF(args, A, features):
 		print_clusters(W, features, args.cluster_size)
 
 		# Run alternating least squares with init_W and init_H
-		W, H = als(A, num_clusters, num_iter = args.num_iters, init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
+		W, H = als(A, args.num_clusters, num_iter = args.num_iters, init_W = init_W, init_H = init_H, print_enabled = args.print_enabled)
 		print_clusters(W, features, args.cluster_size)
 
 		# Run alternating non-negative least squares with active set with init_W and init_H
